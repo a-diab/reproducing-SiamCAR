@@ -93,7 +93,7 @@ class ResNet(nn.Module):
         self.averagePool = torch.nn.AvgPool2d(kernel_size=4,stride=1)
         self.fc    =  torch.nn.Linear(512*block.expansion,used_layers)
 
-def _layer(self,block,output_planes,num_layers,stride=1):
+    def _layer(self,block,output_planes,num_layers,stride=1):
         dim_change = None
         if stride!=1 or input_planes!= self.output_planes*block.expansion:
             dim_change = nn.Sequential(nn.Conv2d(self.input_planes,output_planes*block.expansion,kernel_size=1,stride=stride),
@@ -128,9 +128,9 @@ def _layer(self,block,output_planes,num_layers,stride=1):
 # In[ ]:
 
 
-def resnet50(nn.model):
+def resnet50(used_layers):
    ## Constructs a ResNet-50 model.
-    model = ResNet(Bottleneck, [3, 4, 6, 3])
+    model = ResNet(Bottleneck, [3, 4, 6, 3], used_layers)
     return model
 
 
