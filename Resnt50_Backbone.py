@@ -12,9 +12,9 @@ import torch.nn.functional as F
 
 class Basic_Block(nn.Module):
     expansion = 1
-    def __init__(self,input_planes,output_planes,stride=1,dim_change=None):     #dim_change : downsample
+    def __init__(self,input_planes,output_planes,stride=1,dim_change=None):     
         super(Basic_Block,self).__init__()
-        #convolutional layers with batch norms
+        
         self.conv1 = nn.Conv2d(input_planes,output_planes,stride=stride,kernel_size=3,padding=1,bias=False,)
         self.bn1   = nn.BatchNorm2d(output_planes)
         self.conv2 = nn.Conv2d(output_planes,output_planes,stride=1,kernel_size=3,padding=1)
@@ -68,7 +68,7 @@ class ResNet(nn.Module):
         super(ResNet,self).__init__()
         # according to research paper:
         self.input_planes = 64
-        self.conv1 = nn.Conv2d(3,64,kernel_size=7,stride=2,padding=0, bias=False)
+        self.conv1 = nn.Conv2d(3,64,kernel_size=7,stride=2, bias=False)
         self.bn1   = torch.nn.BatchNorm2d(64)
         self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)  
         self.layer1 = self._layer(block,64,num_layers[0],stride=1)
@@ -110,6 +110,10 @@ def _layer(self,block,output_planes,num_layers,stride=1):
         if stride!=1 or input_planes!= self.output_planes*block.expansion:
             dim_change = nn.Sequential(nn.Conv2d(self.input_planes,output_planes*block.expansion,kernel_size=1,stride=stride),
                                              nn.BatchNorm2d(output_planes*block.expansion))
+            else 
+            downsample = nn.Sequential(nn.Conv2d(self.input_planes,output_planes*block.expansion,kernel_size=1,stride=3, bias=False,),
+                                             nn.BatchNorm2d(output_planes*block.expansion),)# kernel=3
+            
         netLayers =[]
         netLayers.append(block(self.input_planes,output_planes,stride=stride,dim_change=dim_change))
         self.input_planes = planes * block.expansion
