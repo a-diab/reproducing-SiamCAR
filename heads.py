@@ -18,9 +18,8 @@ class Heads(nn.Module):
         
         localization_tower = []
         classification_tower = []
-        num_classes=2               #cfg.TRAIN.NUM_CLASSES
-        
-        for i in range(4):            #cfg.TRAIN.NUM_CONVS
+        num_classes=2              
+        for i in range(4):            
             
             classification_tower.append(nn.Conv2d(in_channels,in_channels,kernel_size=3,stride=1,padding=1))
             classification_tower.append(nn.GroupNorm(32, in_channels))
@@ -48,7 +47,7 @@ class Heads(nn.Module):
                     nn.init.constant_(l.bias, 0)
                     
         # initialize the bias for focal loss
-        prior_prob = 0.01                                   #cfg.TRAIN.PRIOR_PROB
+        prior_prob = 0.01                                  
         bias_value = -math.log((1 - prior_prob) / prior_prob)
         nn.init.constant_(self.class_logits.bias, bias_value)
         
