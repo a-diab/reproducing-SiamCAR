@@ -95,15 +95,15 @@ class ResNet(nn.Module):
 
     def _layer(self,block,output_planes,num_layers,stride=1):
         dim_change = None
-        if stride!=1 or input_planes!= self.output_planes*block.expansion:
+        if stride!=1 or self.input_planes!= self.output_planes*block.expansion:
             dim_change = nn.Sequential(nn.Conv2d(self.input_planes,output_planes*block.expansion,kernel_size=1,stride=stride),
                                              nn.BatchNorm2d(output_planes*block.expansion))
         netLayers =[]
         netLayers.append(block(self.input_planes,output_planes,stride=stride,dim_change=dim_change))
-        self.input_planes = planes * block.expansion
+        self.input_planes = output_planes * block.expansion
         for i in range(1,num_layers):
             netLayers.append(block(self.input_planes,output_planes))
-            self.input_planes = planes * block.expansion
+            self.input_planes = output_planes * block.expansion
         
         return nn.Sequential(*netLayers)
     
@@ -130,7 +130,7 @@ class ResNet(nn.Module):
 
 def resnet50(used_layers):
    ## Constructs a ResNet-50 model.
-    model = ResNet(Bottleneck, [3, 4, 6, 3], used_layers)
+    model = ResNet(bottleNeck, [3, 4, 6, 3], used_layers)
     return model
 
 
