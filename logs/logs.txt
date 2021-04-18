@@ -1,0 +1,2108 @@
+[2021-04-15 21:32:50,755-rk0-train.py#268] Version Information: 
+commit : 
+  log  : 
+
+[2021-04-15 21:32:50,755-rk0-train.py#269] config 
+{
+    "META_ARC": "siamcar_r50",
+    "CUDA": true,
+    "TRAIN": {
+        "EXEMPLAR_SIZE": 127,
+        "SEARCH_SIZE": 255,
+        "OUTPUT_SIZE": 25,
+        "RESUME": "",
+        "PRETRAINED": "",
+        "LOG_DIR": "./logs",
+        "SNAPSHOT_DIR": "./snapshot",
+        "EPOCH": 20,
+        "START_EPOCH": 0,
+        "BATCH_SIZE": 80,
+        "NUM_WORKERS": 1,
+        "MOMENTUM": 0.9,
+        "WEIGHT_DECAY": 0.0001,
+        "CLS_WEIGHT": 1.0,
+        "LOC_WEIGHT": 3.0,
+        "CEN_WEIGHT": 1.0,
+        "PRINT_FREQ": 20,
+        "LOG_GRADS": false,
+        "GRAD_CLIP": 10.0,
+        "BASE_LR": 0.005,
+        "LR": {
+            "TYPE": "log",
+            "KWARGS": {
+                "start_lr": 0.005,
+                "end_lr": 0.0005
+            }
+        },
+        "LR_WARMUP": {
+            "WARMUP": true,
+            "TYPE": "step",
+            "EPOCH": 5,
+            "KWARGS": {
+                "start_lr": 0.001,
+                "end_lr": 0.005,
+                "step": 1
+            }
+        },
+        "NUM_CLASSES": 2,
+        "NUM_CONVS": 4,
+        "PRIOR_PROB": 0.01,
+        "LOSS_ALPHA": 0.25,
+        "LOSS_GAMMA": 2.0
+    },
+    "DATASET": {
+        "TEMPLATE": {
+            "SHIFT": 4,
+            "SCALE": 0.05,
+            "BLUR": 0.0,
+            "FLIP": 0.0,
+            "COLOR": 1.0
+        },
+        "SEARCH": {
+            "SHIFT": 64,
+            "SCALE": 0.18,
+            "BLUR": 0.2,
+            "FLIP": 0.0,
+            "COLOR": 1.0
+        },
+        "NEG": 0.0,
+        "GRAY": 0.0,
+        "NAMES": [
+            "VID",
+            "YOUTUBEBB",
+            "COCO",
+            "DET"
+        ],
+        "VID": {
+            "ROOT": "train_dataset/vid/crop511",
+            "ANNO": "train_dataset/vid/train.json",
+            "FRAME_RANGE": 100,
+            "NUM_USE": 100000
+        },
+        "YOUTUBEBB": {
+            "ROOT": "train_dataset/yt_bb/crop511",
+            "ANNO": "train_dataset/yt_bb/train.json",
+            "FRAME_RANGE": 3,
+            "NUM_USE": -1
+        },
+        "COCO": {
+            "ROOT": "train_dataset/coco/crop511",
+            "ANNO": "train_dataset/coco/train2017.json",
+            "FRAME_RANGE": 1,
+            "NUM_USE": -1
+        },
+        "DET": {
+            "ROOT": "train_dataset/det/crop511",
+            "ANNO": "train_dataset/det/train.json",
+            "FRAME_RANGE": 1,
+            "NUM_USE": -1
+        },
+        "GOT": {
+            "ROOT": "train_dataset/got10k/crop511",
+            "ANNO": "train_dataset/got10k/train.json",
+            "FRAME_RANGE": 50,
+            "NUM_USE": 100000
+        },
+        "LaSOT": {
+            "ROOT": "train_dataset/lasot/crop511",
+            "ANNO": "train_dataset/lasot/train.json",
+            "FRAME_RANGE": 100,
+            "NUM_USE": 100000
+        },
+        "VIDEOS_PER_EPOCH": 600000
+    },
+    "BACKBONE": {
+        "TYPE": "resnet50",
+        "KWARGS": {
+            "used_layers": [
+                2,
+                3,
+                4
+            ]
+        },
+        "PRETRAINED": "",
+        "TRAIN_LAYERS": [
+            "layer2",
+            "layer3",
+            "layer4"
+        ],
+        "LAYERS_LR": 0.1,
+        "TRAIN_EPOCH": 10
+    },
+    "ADJUST": {
+        "ADJUST": true,
+        "KWARGS": {
+            "in_channels": [
+                512,
+                1024,
+                2048
+            ],
+            "out_channels": [
+                256,
+                256,
+                256
+            ]
+        },
+        "TYPE": "AdjustAllLayer"
+    },
+    "CAR": {
+        "TYPE": "MultiCAR",
+        "KWARGS": {}
+    },
+    "TRACK": {
+        "TYPE": "SiamCARTracker",
+        "PENALTY_K": 0.04,
+        "WINDOW_INFLUENCE": 0.44,
+        "LR": 0.33,
+        "EXEMPLAR_SIZE": 127,
+        "INSTANCE_SIZE": 255,
+        "CONTEXT_AMOUNT": 0.5,
+        "STRIDE": 8,
+        "SCORE_SIZE": 25,
+        "hanming": true,
+        "NUM_K": 2,
+        "NUM_N": 1,
+        "REGION_S": 0.1,
+        "REGION_L": 0.44
+    },
+    "HP_SEARCH": {
+        "OTB100": [
+            0.35,
+            0.2,
+            0.45
+        ],
+        "GOT10K": [
+            0.7,
+            0.06,
+            0.1
+        ],
+        "UAV123": [
+            0.4,
+            0.2,
+            0.3
+        ],
+        "LaSOT": [
+            0.33,
+            0.04,
+            0.3
+        ]
+    }
+}
+[2021-04-15 21:32:53,157-rk0-train.py# 59] build train dataset
+[2021-04-15 21:32:53,158-rk0-dataset.py# 40] loading VID
+[2021-04-15 21:36:37,412-rk0-train.py#268] Version Information: 
+commit : 
+  log  : 
+
+[2021-04-15 21:36:37,413-rk0-train.py#269] config 
+{
+    "META_ARC": "siamcar_r50",
+    "CUDA": true,
+    "TRAIN": {
+        "EXEMPLAR_SIZE": 127,
+        "SEARCH_SIZE": 255,
+        "OUTPUT_SIZE": 25,
+        "RESUME": "",
+        "PRETRAINED": "",
+        "LOG_DIR": "./logs",
+        "SNAPSHOT_DIR": "./snapshot",
+        "EPOCH": 20,
+        "START_EPOCH": 0,
+        "BATCH_SIZE": 80,
+        "NUM_WORKERS": 1,
+        "MOMENTUM": 0.9,
+        "WEIGHT_DECAY": 0.0001,
+        "CLS_WEIGHT": 1.0,
+        "LOC_WEIGHT": 3.0,
+        "CEN_WEIGHT": 1.0,
+        "PRINT_FREQ": 20,
+        "LOG_GRADS": false,
+        "GRAD_CLIP": 10.0,
+        "BASE_LR": 0.005,
+        "LR": {
+            "TYPE": "log",
+            "KWARGS": {
+                "start_lr": 0.005,
+                "end_lr": 0.0005
+            }
+        },
+        "LR_WARMUP": {
+            "WARMUP": true,
+            "TYPE": "step",
+            "EPOCH": 5,
+            "KWARGS": {
+                "start_lr": 0.001,
+                "end_lr": 0.005,
+                "step": 1
+            }
+        },
+        "NUM_CLASSES": 2,
+        "NUM_CONVS": 4,
+        "PRIOR_PROB": 0.01,
+        "LOSS_ALPHA": 0.25,
+        "LOSS_GAMMA": 2.0
+    },
+    "DATASET": {
+        "TEMPLATE": {
+            "SHIFT": 4,
+            "SCALE": 0.05,
+            "BLUR": 0.0,
+            "FLIP": 0.0,
+            "COLOR": 1.0
+        },
+        "SEARCH": {
+            "SHIFT": 64,
+            "SCALE": 0.18,
+            "BLUR": 0.2,
+            "FLIP": 0.0,
+            "COLOR": 1.0
+        },
+        "NEG": 0.0,
+        "GRAY": 0.0,
+        "NAMES": [
+            "VID",
+            "YOUTUBEBB",
+            "COCO",
+            "DET"
+        ],
+        "VID": {
+            "ROOT": "train_dataset/vid/crop511",
+            "ANNO": "train_dataset/vid/train.json",
+            "FRAME_RANGE": 100,
+            "NUM_USE": 100000
+        },
+        "YOUTUBEBB": {
+            "ROOT": "train_dataset/yt_bb/crop511",
+            "ANNO": "train_dataset/yt_bb/train.json",
+            "FRAME_RANGE": 3,
+            "NUM_USE": -1
+        },
+        "COCO": {
+            "ROOT": "train_dataset/coco/crop511",
+            "ANNO": "train_dataset/coco/train2017.json",
+            "FRAME_RANGE": 1,
+            "NUM_USE": -1
+        },
+        "DET": {
+            "ROOT": "train_dataset/det/crop511",
+            "ANNO": "train_dataset/det/train.json",
+            "FRAME_RANGE": 1,
+            "NUM_USE": -1
+        },
+        "GOT": {
+            "ROOT": "train_dataset/got10k/crop511",
+            "ANNO": "train_dataset/got10k/train.json",
+            "FRAME_RANGE": 50,
+            "NUM_USE": 100000
+        },
+        "LaSOT": {
+            "ROOT": "train_dataset/lasot/crop511",
+            "ANNO": "train_dataset/lasot/train.json",
+            "FRAME_RANGE": 100,
+            "NUM_USE": 100000
+        },
+        "VIDEOS_PER_EPOCH": 600000
+    },
+    "BACKBONE": {
+        "TYPE": "resnet50",
+        "KWARGS": {
+            "used_layers": [
+                2,
+                3,
+                4
+            ]
+        },
+        "PRETRAINED": "",
+        "TRAIN_LAYERS": [
+            "layer2",
+            "layer3",
+            "layer4"
+        ],
+        "LAYERS_LR": 0.1,
+        "TRAIN_EPOCH": 10
+    },
+    "ADJUST": {
+        "ADJUST": true,
+        "KWARGS": {
+            "in_channels": [
+                512,
+                1024,
+                2048
+            ],
+            "out_channels": [
+                256,
+                256,
+                256
+            ]
+        },
+        "TYPE": "AdjustAllLayer"
+    },
+    "CAR": {
+        "TYPE": "MultiCAR",
+        "KWARGS": {}
+    },
+    "TRACK": {
+        "TYPE": "SiamCARTracker",
+        "PENALTY_K": 0.04,
+        "WINDOW_INFLUENCE": 0.44,
+        "LR": 0.33,
+        "EXEMPLAR_SIZE": 127,
+        "INSTANCE_SIZE": 255,
+        "CONTEXT_AMOUNT": 0.5,
+        "STRIDE": 8,
+        "SCORE_SIZE": 25,
+        "hanming": true,
+        "NUM_K": 2,
+        "NUM_N": 1,
+        "REGION_S": 0.1,
+        "REGION_L": 0.44
+    },
+    "HP_SEARCH": {
+        "OTB100": [
+            0.35,
+            0.2,
+            0.45
+        ],
+        "GOT10K": [
+            0.7,
+            0.06,
+            0.1
+        ],
+        "UAV123": [
+            0.4,
+            0.2,
+            0.3
+        ],
+        "LaSOT": [
+            0.33,
+            0.04,
+            0.3
+        ]
+    }
+}
+[2021-04-15 21:36:38,947-rk0-train.py# 59] build train dataset
+[2021-04-15 21:36:38,948-rk0-dataset.py# 40] loading VID
+[2021-04-15 21:37:39,957-rk0-train.py#268] Version Information: 
+commit : 
+  log  : 
+
+[2021-04-15 21:37:39,957-rk0-train.py#269] config 
+{
+    "META_ARC": "siamcar_r50",
+    "CUDA": true,
+    "TRAIN": {
+        "EXEMPLAR_SIZE": 127,
+        "SEARCH_SIZE": 255,
+        "OUTPUT_SIZE": 25,
+        "RESUME": "",
+        "PRETRAINED": "",
+        "LOG_DIR": "./logs",
+        "SNAPSHOT_DIR": "./snapshot",
+        "EPOCH": 20,
+        "START_EPOCH": 0,
+        "BATCH_SIZE": 80,
+        "NUM_WORKERS": 1,
+        "MOMENTUM": 0.9,
+        "WEIGHT_DECAY": 0.0001,
+        "CLS_WEIGHT": 1.0,
+        "LOC_WEIGHT": 3.0,
+        "CEN_WEIGHT": 1.0,
+        "PRINT_FREQ": 20,
+        "LOG_GRADS": false,
+        "GRAD_CLIP": 10.0,
+        "BASE_LR": 0.005,
+        "LR": {
+            "TYPE": "log",
+            "KWARGS": {
+                "start_lr": 0.005,
+                "end_lr": 0.0005
+            }
+        },
+        "LR_WARMUP": {
+            "WARMUP": true,
+            "TYPE": "step",
+            "EPOCH": 5,
+            "KWARGS": {
+                "start_lr": 0.001,
+                "end_lr": 0.005,
+                "step": 1
+            }
+        },
+        "NUM_CLASSES": 2,
+        "NUM_CONVS": 4,
+        "PRIOR_PROB": 0.01,
+        "LOSS_ALPHA": 0.25,
+        "LOSS_GAMMA": 2.0
+    },
+    "DATASET": {
+        "TEMPLATE": {
+            "SHIFT": 4,
+            "SCALE": 0.05,
+            "BLUR": 0.0,
+            "FLIP": 0.0,
+            "COLOR": 1.0
+        },
+        "SEARCH": {
+            "SHIFT": 64,
+            "SCALE": 0.18,
+            "BLUR": 0.2,
+            "FLIP": 0.0,
+            "COLOR": 1.0
+        },
+        "NEG": 0.0,
+        "GRAY": 0.0,
+        "NAMES": [
+            "VID",
+            "YOUTUBEBB",
+            "COCO",
+            "DET"
+        ],
+        "VID": {
+            "ROOT": "train_dataset/vid/crop511",
+            "ANNO": "train_dataset/vid/train.json",
+            "FRAME_RANGE": 100,
+            "NUM_USE": 100000
+        },
+        "YOUTUBEBB": {
+            "ROOT": "train_dataset/yt_bb/crop511",
+            "ANNO": "train_dataset/yt_bb/train.json",
+            "FRAME_RANGE": 3,
+            "NUM_USE": -1
+        },
+        "COCO": {
+            "ROOT": "train_dataset/coco/crop511",
+            "ANNO": "train_dataset/coco/train2017.json",
+            "FRAME_RANGE": 1,
+            "NUM_USE": -1
+        },
+        "DET": {
+            "ROOT": "train_dataset/det/crop511",
+            "ANNO": "train_dataset/det/train.json",
+            "FRAME_RANGE": 1,
+            "NUM_USE": -1
+        },
+        "GOT": {
+            "ROOT": "train_dataset/got10k/crop511",
+            "ANNO": "train_dataset/got10k/train.json",
+            "FRAME_RANGE": 50,
+            "NUM_USE": 100000
+        },
+        "LaSOT": {
+            "ROOT": "train_dataset/lasot/crop511",
+            "ANNO": "train_dataset/lasot/train.json",
+            "FRAME_RANGE": 100,
+            "NUM_USE": 100000
+        },
+        "VIDEOS_PER_EPOCH": 600000
+    },
+    "BACKBONE": {
+        "TYPE": "resnet50",
+        "KWARGS": {
+            "used_layers": [
+                2,
+                3,
+                4
+            ]
+        },
+        "PRETRAINED": "",
+        "TRAIN_LAYERS": [
+            "layer2",
+            "layer3",
+            "layer4"
+        ],
+        "LAYERS_LR": 0.1,
+        "TRAIN_EPOCH": 10
+    },
+    "ADJUST": {
+        "ADJUST": true,
+        "KWARGS": {
+            "in_channels": [
+                512,
+                1024,
+                2048
+            ],
+            "out_channels": [
+                256,
+                256,
+                256
+            ]
+        },
+        "TYPE": "AdjustAllLayer"
+    },
+    "CAR": {
+        "TYPE": "MultiCAR",
+        "KWARGS": {}
+    },
+    "TRACK": {
+        "TYPE": "SiamCARTracker",
+        "PENALTY_K": 0.04,
+        "WINDOW_INFLUENCE": 0.44,
+        "LR": 0.33,
+        "EXEMPLAR_SIZE": 127,
+        "INSTANCE_SIZE": 255,
+        "CONTEXT_AMOUNT": 0.5,
+        "STRIDE": 8,
+        "SCORE_SIZE": 25,
+        "hanming": true,
+        "NUM_K": 2,
+        "NUM_N": 1,
+        "REGION_S": 0.1,
+        "REGION_L": 0.44
+    },
+    "HP_SEARCH": {
+        "OTB100": [
+            0.35,
+            0.2,
+            0.45
+        ],
+        "GOT10K": [
+            0.7,
+            0.06,
+            0.1
+        ],
+        "UAV123": [
+            0.4,
+            0.2,
+            0.3
+        ],
+        "LaSOT": [
+            0.33,
+            0.04,
+            0.3
+        ]
+    }
+}
+[2021-04-15 21:37:41,427-rk0-train.py# 59] build train dataset
+[2021-04-15 21:37:41,428-rk0-dataset.py# 40] loading VID
+[2021-04-15 21:38:04,574-rk0-train.py#268] Version Information: 
+commit : 
+  log  : 
+
+[2021-04-15 21:38:04,574-rk0-train.py#269] config 
+{
+    "META_ARC": "siamcar_r50",
+    "CUDA": true,
+    "TRAIN": {
+        "EXEMPLAR_SIZE": 127,
+        "SEARCH_SIZE": 255,
+        "OUTPUT_SIZE": 25,
+        "RESUME": "",
+        "PRETRAINED": "",
+        "LOG_DIR": "./logs",
+        "SNAPSHOT_DIR": "./snapshot",
+        "EPOCH": 20,
+        "START_EPOCH": 0,
+        "BATCH_SIZE": 80,
+        "NUM_WORKERS": 1,
+        "MOMENTUM": 0.9,
+        "WEIGHT_DECAY": 0.0001,
+        "CLS_WEIGHT": 1.0,
+        "LOC_WEIGHT": 3.0,
+        "CEN_WEIGHT": 1.0,
+        "PRINT_FREQ": 20,
+        "LOG_GRADS": false,
+        "GRAD_CLIP": 10.0,
+        "BASE_LR": 0.005,
+        "LR": {
+            "TYPE": "log",
+            "KWARGS": {
+                "start_lr": 0.005,
+                "end_lr": 0.0005
+            }
+        },
+        "LR_WARMUP": {
+            "WARMUP": true,
+            "TYPE": "step",
+            "EPOCH": 5,
+            "KWARGS": {
+                "start_lr": 0.001,
+                "end_lr": 0.005,
+                "step": 1
+            }
+        },
+        "NUM_CLASSES": 2,
+        "NUM_CONVS": 4,
+        "PRIOR_PROB": 0.01,
+        "LOSS_ALPHA": 0.25,
+        "LOSS_GAMMA": 2.0
+    },
+    "DATASET": {
+        "TEMPLATE": {
+            "SHIFT": 4,
+            "SCALE": 0.05,
+            "BLUR": 0.0,
+            "FLIP": 0.0,
+            "COLOR": 1.0
+        },
+        "SEARCH": {
+            "SHIFT": 64,
+            "SCALE": 0.18,
+            "BLUR": 0.2,
+            "FLIP": 0.0,
+            "COLOR": 1.0
+        },
+        "NEG": 0.0,
+        "GRAY": 0.0,
+        "NAMES": [
+            "VID",
+            "YOUTUBEBB",
+            "COCO",
+            "DET"
+        ],
+        "VID": {
+            "ROOT": "train_dataset/vid/crop511",
+            "ANNO": "train_dataset/vid/train.json",
+            "FRAME_RANGE": 100,
+            "NUM_USE": 100000
+        },
+        "YOUTUBEBB": {
+            "ROOT": "train_dataset/yt_bb/crop511",
+            "ANNO": "train_dataset/yt_bb/train.json",
+            "FRAME_RANGE": 3,
+            "NUM_USE": -1
+        },
+        "COCO": {
+            "ROOT": "train_dataset/coco/crop511",
+            "ANNO": "train_dataset/coco/train2017.json",
+            "FRAME_RANGE": 1,
+            "NUM_USE": -1
+        },
+        "DET": {
+            "ROOT": "train_dataset/det/crop511",
+            "ANNO": "train_dataset/det/train.json",
+            "FRAME_RANGE": 1,
+            "NUM_USE": -1
+        },
+        "GOT": {
+            "ROOT": "train_dataset/got10k/crop511",
+            "ANNO": "train_dataset/got10k/train.json",
+            "FRAME_RANGE": 50,
+            "NUM_USE": 100000
+        },
+        "LaSOT": {
+            "ROOT": "train_dataset/lasot/crop511",
+            "ANNO": "train_dataset/lasot/train.json",
+            "FRAME_RANGE": 100,
+            "NUM_USE": 100000
+        },
+        "VIDEOS_PER_EPOCH": 600000
+    },
+    "BACKBONE": {
+        "TYPE": "resnet50",
+        "KWARGS": {
+            "used_layers": [
+                2,
+                3,
+                4
+            ]
+        },
+        "PRETRAINED": "",
+        "TRAIN_LAYERS": [
+            "layer2",
+            "layer3",
+            "layer4"
+        ],
+        "LAYERS_LR": 0.1,
+        "TRAIN_EPOCH": 10
+    },
+    "ADJUST": {
+        "ADJUST": true,
+        "KWARGS": {
+            "in_channels": [
+                512,
+                1024,
+                2048
+            ],
+            "out_channels": [
+                256,
+                256,
+                256
+            ]
+        },
+        "TYPE": "AdjustAllLayer"
+    },
+    "CAR": {
+        "TYPE": "MultiCAR",
+        "KWARGS": {}
+    },
+    "TRACK": {
+        "TYPE": "SiamCARTracker",
+        "PENALTY_K": 0.04,
+        "WINDOW_INFLUENCE": 0.44,
+        "LR": 0.33,
+        "EXEMPLAR_SIZE": 127,
+        "INSTANCE_SIZE": 255,
+        "CONTEXT_AMOUNT": 0.5,
+        "STRIDE": 8,
+        "SCORE_SIZE": 25,
+        "hanming": true,
+        "NUM_K": 2,
+        "NUM_N": 1,
+        "REGION_S": 0.1,
+        "REGION_L": 0.44
+    },
+    "HP_SEARCH": {
+        "OTB100": [
+            0.35,
+            0.2,
+            0.45
+        ],
+        "GOT10K": [
+            0.7,
+            0.06,
+            0.1
+        ],
+        "UAV123": [
+            0.4,
+            0.2,
+            0.3
+        ],
+        "LaSOT": [
+            0.33,
+            0.04,
+            0.3
+        ]
+    }
+}
+[2021-04-15 21:38:06,023-rk0-train.py# 59] build train dataset
+[2021-04-15 21:38:06,024-rk0-dataset.py# 40] loading VID
+[2021-04-15 21:40:42,932-rk0-train.py#268] Version Information: 
+commit : 
+  log  : 
+
+[2021-04-15 21:40:42,933-rk0-train.py#269] config 
+{
+    "META_ARC": "siamcar_r50",
+    "CUDA": true,
+    "TRAIN": {
+        "EXEMPLAR_SIZE": 127,
+        "SEARCH_SIZE": 255,
+        "OUTPUT_SIZE": 25,
+        "RESUME": "",
+        "PRETRAINED": "",
+        "LOG_DIR": "./logs",
+        "SNAPSHOT_DIR": "./snapshot",
+        "EPOCH": 20,
+        "START_EPOCH": 0,
+        "BATCH_SIZE": 80,
+        "NUM_WORKERS": 1,
+        "MOMENTUM": 0.9,
+        "WEIGHT_DECAY": 0.0001,
+        "CLS_WEIGHT": 1.0,
+        "LOC_WEIGHT": 3.0,
+        "CEN_WEIGHT": 1.0,
+        "PRINT_FREQ": 20,
+        "LOG_GRADS": false,
+        "GRAD_CLIP": 10.0,
+        "BASE_LR": 0.005,
+        "LR": {
+            "TYPE": "log",
+            "KWARGS": {
+                "start_lr": 0.005,
+                "end_lr": 0.0005
+            }
+        },
+        "LR_WARMUP": {
+            "WARMUP": true,
+            "TYPE": "step",
+            "EPOCH": 5,
+            "KWARGS": {
+                "start_lr": 0.001,
+                "end_lr": 0.005,
+                "step": 1
+            }
+        },
+        "NUM_CLASSES": 2,
+        "NUM_CONVS": 4,
+        "PRIOR_PROB": 0.01,
+        "LOSS_ALPHA": 0.25,
+        "LOSS_GAMMA": 2.0
+    },
+    "DATASET": {
+        "TEMPLATE": {
+            "SHIFT": 4,
+            "SCALE": 0.05,
+            "BLUR": 0.0,
+            "FLIP": 0.0,
+            "COLOR": 1.0
+        },
+        "SEARCH": {
+            "SHIFT": 64,
+            "SCALE": 0.18,
+            "BLUR": 0.2,
+            "FLIP": 0.0,
+            "COLOR": 1.0
+        },
+        "NEG": 0.0,
+        "GRAY": 0.0,
+        "NAMES": [
+            "VID",
+            "YOUTUBEBB",
+            "COCO",
+            "DET"
+        ],
+        "VID": {
+            "ROOT": "train_dataset/vid/crop511",
+            "ANNO": "train_dataset/vid/train.json",
+            "FRAME_RANGE": 100,
+            "NUM_USE": 100000
+        },
+        "YOUTUBEBB": {
+            "ROOT": "train_dataset/yt_bb/crop511",
+            "ANNO": "train_dataset/yt_bb/train.json",
+            "FRAME_RANGE": 3,
+            "NUM_USE": -1
+        },
+        "COCO": {
+            "ROOT": "train_dataset/coco/crop511",
+            "ANNO": "train_dataset/coco/train2017.json",
+            "FRAME_RANGE": 1,
+            "NUM_USE": -1
+        },
+        "DET": {
+            "ROOT": "train_dataset/det/crop511",
+            "ANNO": "train_dataset/det/train.json",
+            "FRAME_RANGE": 1,
+            "NUM_USE": -1
+        },
+        "GOT": {
+            "ROOT": "train_dataset/got10k/crop511",
+            "ANNO": "train_dataset/got10k/train.json",
+            "FRAME_RANGE": 50,
+            "NUM_USE": 100000
+        },
+        "LaSOT": {
+            "ROOT": "train_dataset/lasot/crop511",
+            "ANNO": "train_dataset/lasot/train.json",
+            "FRAME_RANGE": 100,
+            "NUM_USE": 100000
+        },
+        "VIDEOS_PER_EPOCH": 600000
+    },
+    "BACKBONE": {
+        "TYPE": "resnet50",
+        "KWARGS": {
+            "used_layers": [
+                2,
+                3,
+                4
+            ]
+        },
+        "PRETRAINED": "",
+        "TRAIN_LAYERS": [
+            "layer2",
+            "layer3",
+            "layer4"
+        ],
+        "LAYERS_LR": 0.1,
+        "TRAIN_EPOCH": 10
+    },
+    "ADJUST": {
+        "ADJUST": true,
+        "KWARGS": {
+            "in_channels": [
+                512,
+                1024,
+                2048
+            ],
+            "out_channels": [
+                256,
+                256,
+                256
+            ]
+        },
+        "TYPE": "AdjustAllLayer"
+    },
+    "CAR": {
+        "TYPE": "MultiCAR",
+        "KWARGS": {}
+    },
+    "TRACK": {
+        "TYPE": "SiamCARTracker",
+        "PENALTY_K": 0.04,
+        "WINDOW_INFLUENCE": 0.44,
+        "LR": 0.33,
+        "EXEMPLAR_SIZE": 127,
+        "INSTANCE_SIZE": 255,
+        "CONTEXT_AMOUNT": 0.5,
+        "STRIDE": 8,
+        "SCORE_SIZE": 25,
+        "hanming": true,
+        "NUM_K": 2,
+        "NUM_N": 1,
+        "REGION_S": 0.1,
+        "REGION_L": 0.44
+    },
+    "HP_SEARCH": {
+        "OTB100": [
+            0.35,
+            0.2,
+            0.45
+        ],
+        "GOT10K": [
+            0.7,
+            0.06,
+            0.1
+        ],
+        "UAV123": [
+            0.4,
+            0.2,
+            0.3
+        ],
+        "LaSOT": [
+            0.33,
+            0.04,
+            0.3
+        ]
+    }
+}
+[2021-04-15 21:40:44,374-rk0-train.py# 59] build train dataset
+[2021-04-15 21:40:44,375-rk0-dataset.py# 40] loading VID
+[2021-04-16 02:57:38,635-rk0-train.py#268] Version Information: 
+commit : 
+  log  : 
+
+[2021-04-16 02:57:38,636-rk0-train.py#269] config 
+{
+    "META_ARC": "siamcar_r50",
+    "CUDA": true,
+    "TRAIN": {
+        "EXEMPLAR_SIZE": 127,
+        "SEARCH_SIZE": 255,
+        "OUTPUT_SIZE": 25,
+        "RESUME": "",
+        "PRETRAINED": "",
+        "LOG_DIR": "./logs",
+        "SNAPSHOT_DIR": "./snapshot",
+        "EPOCH": 20,
+        "START_EPOCH": 0,
+        "BATCH_SIZE": 80,
+        "NUM_WORKERS": 1,
+        "MOMENTUM": 0.9,
+        "WEIGHT_DECAY": 0.0001,
+        "CLS_WEIGHT": 1.0,
+        "LOC_WEIGHT": 3.0,
+        "CEN_WEIGHT": 1.0,
+        "PRINT_FREQ": 20,
+        "LOG_GRADS": false,
+        "GRAD_CLIP": 10.0,
+        "BASE_LR": 0.005,
+        "LR": {
+            "TYPE": "log",
+            "KWARGS": {
+                "start_lr": 0.005,
+                "end_lr": 0.0005
+            }
+        },
+        "LR_WARMUP": {
+            "WARMUP": true,
+            "TYPE": "step",
+            "EPOCH": 5,
+            "KWARGS": {
+                "start_lr": 0.001,
+                "end_lr": 0.005,
+                "step": 1
+            }
+        },
+        "NUM_CLASSES": 2,
+        "NUM_CONVS": 4,
+        "PRIOR_PROB": 0.01,
+        "LOSS_ALPHA": 0.25,
+        "LOSS_GAMMA": 2.0
+    },
+    "DATASET": {
+        "TEMPLATE": {
+            "SHIFT": 4,
+            "SCALE": 0.05,
+            "BLUR": 0.0,
+            "FLIP": 0.0,
+            "COLOR": 1.0
+        },
+        "SEARCH": {
+            "SHIFT": 64,
+            "SCALE": 0.18,
+            "BLUR": 0.2,
+            "FLIP": 0.0,
+            "COLOR": 1.0
+        },
+        "NEG": 0.0,
+        "GRAY": 0.0,
+        "NAMES": [
+            "VID",
+            "YOUTUBEBB",
+            "COCO",
+            "DET"
+        ],
+        "VID": {
+            "ROOT": "train_dataset/vid/crop511",
+            "ANNO": "train_dataset/vid/train.json",
+            "FRAME_RANGE": 100,
+            "NUM_USE": 100000
+        },
+        "YOUTUBEBB": {
+            "ROOT": "train_dataset/yt_bb/crop511",
+            "ANNO": "train_dataset/yt_bb/train.json",
+            "FRAME_RANGE": 3,
+            "NUM_USE": -1
+        },
+        "COCO": {
+            "ROOT": "train_dataset/coco/crop511",
+            "ANNO": "train_dataset/coco/train2017.json",
+            "FRAME_RANGE": 1,
+            "NUM_USE": -1
+        },
+        "DET": {
+            "ROOT": "train_dataset/det/crop511",
+            "ANNO": "train_dataset/det/train.json",
+            "FRAME_RANGE": 1,
+            "NUM_USE": -1
+        },
+        "GOT": {
+            "ROOT": "train_dataset/got10k/crop511",
+            "ANNO": "train_dataset/got10k/train.json",
+            "FRAME_RANGE": 50,
+            "NUM_USE": 100000
+        },
+        "LaSOT": {
+            "ROOT": "train_dataset/lasot/crop511",
+            "ANNO": "train_dataset/lasot/train.json",
+            "FRAME_RANGE": 100,
+            "NUM_USE": 100000
+        },
+        "VIDEOS_PER_EPOCH": 600000
+    },
+    "BACKBONE": {
+        "TYPE": "resnet50",
+        "KWARGS": {
+            "used_layers": [
+                2,
+                3,
+                4
+            ]
+        },
+        "PRETRAINED": "",
+        "TRAIN_LAYERS": [
+            "layer2",
+            "layer3",
+            "layer4"
+        ],
+        "LAYERS_LR": 0.1,
+        "TRAIN_EPOCH": 10
+    },
+    "ADJUST": {
+        "ADJUST": true,
+        "KWARGS": {
+            "in_channels": [
+                512,
+                1024,
+                2048
+            ],
+            "out_channels": [
+                256,
+                256,
+                256
+            ]
+        },
+        "TYPE": "AdjustAllLayer"
+    },
+    "CAR": {
+        "TYPE": "MultiCAR",
+        "KWARGS": {}
+    },
+    "TRACK": {
+        "TYPE": "SiamCARTracker",
+        "PENALTY_K": 0.04,
+        "WINDOW_INFLUENCE": 0.44,
+        "LR": 0.33,
+        "EXEMPLAR_SIZE": 127,
+        "INSTANCE_SIZE": 255,
+        "CONTEXT_AMOUNT": 0.5,
+        "STRIDE": 8,
+        "SCORE_SIZE": 25,
+        "hanming": true,
+        "NUM_K": 2,
+        "NUM_N": 1,
+        "REGION_S": 0.1,
+        "REGION_L": 0.44
+    },
+    "HP_SEARCH": {
+        "OTB100": [
+            0.35,
+            0.2,
+            0.45
+        ],
+        "GOT10K": [
+            0.7,
+            0.06,
+            0.1
+        ],
+        "UAV123": [
+            0.4,
+            0.2,
+            0.3
+        ],
+        "LaSOT": [
+            0.33,
+            0.04,
+            0.3
+        ]
+    }
+}
+[2021-04-16 02:57:40,942-rk0-train.py# 59] build train dataset
+[2021-04-16 02:57:40,942-rk0-dataset.py# 40] loading VID
+[2021-04-16 02:58:13,324-rk0-train.py#268] Version Information: 
+commit : 
+  log  : 
+
+[2021-04-16 02:58:13,324-rk0-train.py#269] config 
+{
+    "META_ARC": "siamcar_r50",
+    "CUDA": true,
+    "TRAIN": {
+        "EXEMPLAR_SIZE": 127,
+        "SEARCH_SIZE": 255,
+        "OUTPUT_SIZE": 25,
+        "RESUME": "",
+        "PRETRAINED": "",
+        "LOG_DIR": "./logs",
+        "SNAPSHOT_DIR": "./snapshot",
+        "EPOCH": 20,
+        "START_EPOCH": 0,
+        "BATCH_SIZE": 80,
+        "NUM_WORKERS": 1,
+        "MOMENTUM": 0.9,
+        "WEIGHT_DECAY": 0.0001,
+        "CLS_WEIGHT": 1.0,
+        "LOC_WEIGHT": 3.0,
+        "CEN_WEIGHT": 1.0,
+        "PRINT_FREQ": 20,
+        "LOG_GRADS": false,
+        "GRAD_CLIP": 10.0,
+        "BASE_LR": 0.005,
+        "LR": {
+            "TYPE": "log",
+            "KWARGS": {
+                "start_lr": 0.005,
+                "end_lr": 0.0005
+            }
+        },
+        "LR_WARMUP": {
+            "WARMUP": true,
+            "TYPE": "step",
+            "EPOCH": 5,
+            "KWARGS": {
+                "start_lr": 0.001,
+                "end_lr": 0.005,
+                "step": 1
+            }
+        },
+        "NUM_CLASSES": 2,
+        "NUM_CONVS": 4,
+        "PRIOR_PROB": 0.01,
+        "LOSS_ALPHA": 0.25,
+        "LOSS_GAMMA": 2.0
+    },
+    "DATASET": {
+        "TEMPLATE": {
+            "SHIFT": 4,
+            "SCALE": 0.05,
+            "BLUR": 0.0,
+            "FLIP": 0.0,
+            "COLOR": 1.0
+        },
+        "SEARCH": {
+            "SHIFT": 64,
+            "SCALE": 0.18,
+            "BLUR": 0.2,
+            "FLIP": 0.0,
+            "COLOR": 1.0
+        },
+        "NEG": 0.0,
+        "GRAY": 0.0,
+        "NAMES": [
+            "VID",
+            "YOUTUBEBB",
+            "COCO",
+            "DET"
+        ],
+        "VID": {
+            "ROOT": "train_dataset/vid/crop511",
+            "ANNO": "train_dataset/vid/train.json",
+            "FRAME_RANGE": 100,
+            "NUM_USE": 100000
+        },
+        "YOUTUBEBB": {
+            "ROOT": "train_dataset/yt_bb/crop511",
+            "ANNO": "train_dataset/yt_bb/train.json",
+            "FRAME_RANGE": 3,
+            "NUM_USE": -1
+        },
+        "COCO": {
+            "ROOT": "train_dataset/coco/crop511",
+            "ANNO": "train_dataset/coco/train2017.json",
+            "FRAME_RANGE": 1,
+            "NUM_USE": -1
+        },
+        "DET": {
+            "ROOT": "train_dataset/det/crop511",
+            "ANNO": "train_dataset/det/train.json",
+            "FRAME_RANGE": 1,
+            "NUM_USE": -1
+        },
+        "GOT": {
+            "ROOT": "train_dataset/got10k/crop511",
+            "ANNO": "train_dataset/got10k/train.json",
+            "FRAME_RANGE": 50,
+            "NUM_USE": 100000
+        },
+        "LaSOT": {
+            "ROOT": "train_dataset/lasot/crop511",
+            "ANNO": "train_dataset/lasot/train.json",
+            "FRAME_RANGE": 100,
+            "NUM_USE": 100000
+        },
+        "VIDEOS_PER_EPOCH": 600000
+    },
+    "BACKBONE": {
+        "TYPE": "resnet50",
+        "KWARGS": {
+            "used_layers": [
+                2,
+                3,
+                4
+            ]
+        },
+        "PRETRAINED": "",
+        "TRAIN_LAYERS": [
+            "layer2",
+            "layer3",
+            "layer4"
+        ],
+        "LAYERS_LR": 0.1,
+        "TRAIN_EPOCH": 10
+    },
+    "ADJUST": {
+        "ADJUST": true,
+        "KWARGS": {
+            "in_channels": [
+                512,
+                1024,
+                2048
+            ],
+            "out_channels": [
+                256,
+                256,
+                256
+            ]
+        },
+        "TYPE": "AdjustAllLayer"
+    },
+    "CAR": {
+        "TYPE": "MultiCAR",
+        "KWARGS": {}
+    },
+    "TRACK": {
+        "TYPE": "SiamCARTracker",
+        "PENALTY_K": 0.04,
+        "WINDOW_INFLUENCE": 0.44,
+        "LR": 0.33,
+        "EXEMPLAR_SIZE": 127,
+        "INSTANCE_SIZE": 255,
+        "CONTEXT_AMOUNT": 0.5,
+        "STRIDE": 8,
+        "SCORE_SIZE": 25,
+        "hanming": true,
+        "NUM_K": 2,
+        "NUM_N": 1,
+        "REGION_S": 0.1,
+        "REGION_L": 0.44
+    },
+    "HP_SEARCH": {
+        "OTB100": [
+            0.35,
+            0.2,
+            0.45
+        ],
+        "GOT10K": [
+            0.7,
+            0.06,
+            0.1
+        ],
+        "UAV123": [
+            0.4,
+            0.2,
+            0.3
+        ],
+        "LaSOT": [
+            0.33,
+            0.04,
+            0.3
+        ]
+    }
+}
+[2021-04-16 02:58:14,807-rk0-train.py# 59] build train dataset
+[2021-04-16 02:58:14,807-rk0-dataset.py# 40] loading VID
+[2021-04-16 03:52:23,362-rk0-train.py#268] Version Information: 
+commit : 
+  log  : 
+
+[2021-04-16 03:52:23,362-rk0-train.py#269] config 
+{
+    "META_ARC": "siamcar_r50",
+    "CUDA": true,
+    "TRAIN": {
+        "EXEMPLAR_SIZE": 127,
+        "SEARCH_SIZE": 255,
+        "OUTPUT_SIZE": 25,
+        "RESUME": "",
+        "PRETRAINED": "",
+        "LOG_DIR": "./logs",
+        "SNAPSHOT_DIR": "./snapshot",
+        "EPOCH": 20,
+        "START_EPOCH": 0,
+        "BATCH_SIZE": 80,
+        "NUM_WORKERS": 1,
+        "MOMENTUM": 0.9,
+        "WEIGHT_DECAY": 0.0001,
+        "CLS_WEIGHT": 1.0,
+        "LOC_WEIGHT": 3.0,
+        "CEN_WEIGHT": 1.0,
+        "PRINT_FREQ": 20,
+        "LOG_GRADS": false,
+        "GRAD_CLIP": 10.0,
+        "BASE_LR": 0.005,
+        "LR": {
+            "TYPE": "log",
+            "KWARGS": {
+                "start_lr": 0.005,
+                "end_lr": 0.0005
+            }
+        },
+        "LR_WARMUP": {
+            "WARMUP": true,
+            "TYPE": "step",
+            "EPOCH": 5,
+            "KWARGS": {
+                "start_lr": 0.001,
+                "end_lr": 0.005,
+                "step": 1
+            }
+        },
+        "NUM_CLASSES": 2,
+        "NUM_CONVS": 4,
+        "PRIOR_PROB": 0.01,
+        "LOSS_ALPHA": 0.25,
+        "LOSS_GAMMA": 2.0
+    },
+    "DATASET": {
+        "TEMPLATE": {
+            "SHIFT": 4,
+            "SCALE": 0.05,
+            "BLUR": 0.0,
+            "FLIP": 0.0,
+            "COLOR": 1.0
+        },
+        "SEARCH": {
+            "SHIFT": 64,
+            "SCALE": 0.18,
+            "BLUR": 0.2,
+            "FLIP": 0.0,
+            "COLOR": 1.0
+        },
+        "NEG": 0.0,
+        "GRAY": 0.0,
+        "NAMES": [
+            "VID",
+            "YOUTUBEBB",
+            "COCO",
+            "DET"
+        ],
+        "VID": {
+            "ROOT": "train_dataset/vid/crop511",
+            "ANNO": "train_dataset/vid/train.json",
+            "FRAME_RANGE": 100,
+            "NUM_USE": 100000
+        },
+        "YOUTUBEBB": {
+            "ROOT": "train_dataset/yt_bb/crop511",
+            "ANNO": "train_dataset/yt_bb/train.json",
+            "FRAME_RANGE": 3,
+            "NUM_USE": -1
+        },
+        "COCO": {
+            "ROOT": "train_dataset/coco/crop511",
+            "ANNO": "train_dataset/coco/train2017.json",
+            "FRAME_RANGE": 1,
+            "NUM_USE": -1
+        },
+        "DET": {
+            "ROOT": "train_dataset/det/crop511",
+            "ANNO": "train_dataset/det/train.json",
+            "FRAME_RANGE": 1,
+            "NUM_USE": -1
+        },
+        "GOT": {
+            "ROOT": "train_dataset/got10k/crop511",
+            "ANNO": "train_dataset/got10k/train.json",
+            "FRAME_RANGE": 50,
+            "NUM_USE": 100000
+        },
+        "LaSOT": {
+            "ROOT": "train_dataset/lasot/crop511",
+            "ANNO": "train_dataset/lasot/train.json",
+            "FRAME_RANGE": 100,
+            "NUM_USE": 100000
+        },
+        "VIDEOS_PER_EPOCH": 600000
+    },
+    "BACKBONE": {
+        "TYPE": "resnet50",
+        "KWARGS": {
+            "used_layers": [
+                2,
+                3,
+                4
+            ]
+        },
+        "PRETRAINED": "",
+        "TRAIN_LAYERS": [
+            "layer2",
+            "layer3",
+            "layer4"
+        ],
+        "LAYERS_LR": 0.1,
+        "TRAIN_EPOCH": 10
+    },
+    "ADJUST": {
+        "ADJUST": true,
+        "KWARGS": {
+            "in_channels": [
+                512,
+                1024,
+                2048
+            ],
+            "out_channels": [
+                256,
+                256,
+                256
+            ]
+        },
+        "TYPE": "AdjustAllLayer"
+    },
+    "CAR": {
+        "TYPE": "MultiCAR",
+        "KWARGS": {}
+    },
+    "TRACK": {
+        "TYPE": "SiamCARTracker",
+        "PENALTY_K": 0.04,
+        "WINDOW_INFLUENCE": 0.44,
+        "LR": 0.33,
+        "EXEMPLAR_SIZE": 127,
+        "INSTANCE_SIZE": 255,
+        "CONTEXT_AMOUNT": 0.5,
+        "STRIDE": 8,
+        "SCORE_SIZE": 25,
+        "hanming": true,
+        "NUM_K": 2,
+        "NUM_N": 1,
+        "REGION_S": 0.1,
+        "REGION_L": 0.44
+    },
+    "HP_SEARCH": {
+        "OTB100": [
+            0.35,
+            0.2,
+            0.45
+        ],
+        "GOT10K": [
+            0.7,
+            0.06,
+            0.1
+        ],
+        "UAV123": [
+            0.4,
+            0.2,
+            0.3
+        ],
+        "LaSOT": [
+            0.33,
+            0.04,
+            0.3
+        ]
+    }
+}
+[2021-04-16 03:52:24,828-rk0-train.py# 59] build train dataset
+[2021-04-16 03:52:24,828-rk0-dataset.py# 40] loading VID
+[2021-04-17 16:30:40,380-rk0-train.py#269] Version Information: 
+commit : 
+  log  : 
+
+[2021-04-17 16:30:40,380-rk0-train.py#270] config 
+{
+    "META_ARC": "siamcar_r50",
+    "CUDA": true,
+    "TRAIN": {
+        "EXEMPLAR_SIZE": 127,
+        "SEARCH_SIZE": 255,
+        "OUTPUT_SIZE": 25,
+        "RESUME": "",
+        "PRETRAINED": "",
+        "LOG_DIR": "./logs",
+        "SNAPSHOT_DIR": "./snapshot",
+        "EPOCH": 20,
+        "START_EPOCH": 0,
+        "BATCH_SIZE": 80,
+        "NUM_WORKERS": 1,
+        "MOMENTUM": 0.9,
+        "WEIGHT_DECAY": 0.0001,
+        "CLS_WEIGHT": 1.0,
+        "LOC_WEIGHT": 3.0,
+        "CEN_WEIGHT": 1.0,
+        "PRINT_FREQ": 20,
+        "LOG_GRADS": false,
+        "GRAD_CLIP": 10.0,
+        "BASE_LR": 0.005,
+        "LR": {
+            "TYPE": "log",
+            "KWARGS": {
+                "start_lr": 0.005,
+                "end_lr": 0.0005
+            }
+        },
+        "LR_WARMUP": {
+            "WARMUP": true,
+            "TYPE": "step",
+            "EPOCH": 5,
+            "KWARGS": {
+                "start_lr": 0.001,
+                "end_lr": 0.005,
+                "step": 1
+            }
+        },
+        "NUM_CLASSES": 2,
+        "NUM_CONVS": 4,
+        "PRIOR_PROB": 0.01,
+        "LOSS_ALPHA": 0.25,
+        "LOSS_GAMMA": 2.0
+    },
+    "DATASET": {
+        "TEMPLATE": {
+            "SHIFT": 4,
+            "SCALE": 0.05,
+            "BLUR": 0.0,
+            "FLIP": 0.0,
+            "COLOR": 1.0
+        },
+        "SEARCH": {
+            "SHIFT": 64,
+            "SCALE": 0.18,
+            "BLUR": 0.2,
+            "FLIP": 0.0,
+            "COLOR": 1.0
+        },
+        "NEG": 0.0,
+        "GRAY": 0.0,
+        "NAMES": [
+            "VID",
+            "YOUTUBEBB",
+            "COCO",
+            "DET"
+        ],
+        "VID": {
+            "ROOT": "train_dataset/vid/crop511",
+            "ANNO": "train_dataset/vid/train.json",
+            "FRAME_RANGE": 100,
+            "NUM_USE": 100000
+        },
+        "YOUTUBEBB": {
+            "ROOT": "train_dataset/yt_bb/crop511",
+            "ANNO": "train_dataset/yt_bb/train.json",
+            "FRAME_RANGE": 3,
+            "NUM_USE": -1
+        },
+        "COCO": {
+            "ROOT": "train_dataset/coco/crop511",
+            "ANNO": "train_dataset/coco/train2017.json",
+            "FRAME_RANGE": 1,
+            "NUM_USE": -1
+        },
+        "DET": {
+            "ROOT": "train_dataset/det/crop511",
+            "ANNO": "train_dataset/det/train.json",
+            "FRAME_RANGE": 1,
+            "NUM_USE": -1
+        },
+        "GOT": {
+            "ROOT": "train_dataset/got10k/crop511",
+            "ANNO": "train_dataset/got10k/train.json",
+            "FRAME_RANGE": 50,
+            "NUM_USE": 100000
+        },
+        "LaSOT": {
+            "ROOT": "train_dataset/lasot/crop511",
+            "ANNO": "train_dataset/lasot/train.json",
+            "FRAME_RANGE": 100,
+            "NUM_USE": 100000
+        },
+        "VIDEOS_PER_EPOCH": 600000
+    },
+    "BACKBONE": {
+        "TYPE": "resnet50",
+        "KWARGS": {
+            "used_layers": [
+                2,
+                3,
+                4
+            ]
+        },
+        "PRETRAINED": "",
+        "TRAIN_LAYERS": [
+            "layer2",
+            "layer3",
+            "layer4"
+        ],
+        "LAYERS_LR": 0.1,
+        "TRAIN_EPOCH": 10
+    },
+    "ADJUST": {
+        "ADJUST": true,
+        "KWARGS": {
+            "in_channels": [
+                512,
+                1024,
+                2048
+            ],
+            "out_channels": [
+                256,
+                256,
+                256
+            ]
+        },
+        "TYPE": "AdjustAllLayer"
+    },
+    "CAR": {
+        "TYPE": "MultiCAR",
+        "KWARGS": {}
+    },
+    "TRACK": {
+        "TYPE": "SiamCARTracker",
+        "PENALTY_K": 0.04,
+        "WINDOW_INFLUENCE": 0.44,
+        "LR": 0.33,
+        "EXEMPLAR_SIZE": 127,
+        "INSTANCE_SIZE": 255,
+        "CONTEXT_AMOUNT": 0.5,
+        "STRIDE": 8,
+        "SCORE_SIZE": 25,
+        "hanming": true,
+        "NUM_K": 2,
+        "NUM_N": 1,
+        "REGION_S": 0.1,
+        "REGION_L": 0.44
+    },
+    "HP_SEARCH": {
+        "OTB100": [
+            0.35,
+            0.2,
+            0.45
+        ],
+        "GOT10K": [
+            0.7,
+            0.06,
+            0.1
+        ],
+        "UAV123": [
+            0.4,
+            0.2,
+            0.3
+        ],
+        "LaSOT": [
+            0.33,
+            0.04,
+            0.3
+        ]
+    }
+}
+[2021-04-17 16:38:55,168-rk0-train.py#269] Version Information: 
+commit : 
+  log  : 
+
+[2021-04-17 16:38:55,168-rk0-train.py#270] config 
+{
+    "META_ARC": "siamcar_r50",
+    "CUDA": true,
+    "TRAIN": {
+        "EXEMPLAR_SIZE": 127,
+        "SEARCH_SIZE": 255,
+        "OUTPUT_SIZE": 25,
+        "RESUME": "",
+        "PRETRAINED": "",
+        "LOG_DIR": "./logs",
+        "SNAPSHOT_DIR": "./snapshot",
+        "EPOCH": 20,
+        "START_EPOCH": 0,
+        "BATCH_SIZE": 80,
+        "NUM_WORKERS": 1,
+        "MOMENTUM": 0.9,
+        "WEIGHT_DECAY": 0.0001,
+        "CLS_WEIGHT": 1.0,
+        "LOC_WEIGHT": 3.0,
+        "CEN_WEIGHT": 1.0,
+        "PRINT_FREQ": 20,
+        "LOG_GRADS": false,
+        "GRAD_CLIP": 10.0,
+        "BASE_LR": 0.005,
+        "LR": {
+            "TYPE": "log",
+            "KWARGS": {
+                "start_lr": 0.005,
+                "end_lr": 0.0005
+            }
+        },
+        "LR_WARMUP": {
+            "WARMUP": true,
+            "TYPE": "step",
+            "EPOCH": 5,
+            "KWARGS": {
+                "start_lr": 0.001,
+                "end_lr": 0.005,
+                "step": 1
+            }
+        },
+        "NUM_CLASSES": 2,
+        "NUM_CONVS": 4,
+        "PRIOR_PROB": 0.01,
+        "LOSS_ALPHA": 0.25,
+        "LOSS_GAMMA": 2.0
+    },
+    "DATASET": {
+        "TEMPLATE": {
+            "SHIFT": 4,
+            "SCALE": 0.05,
+            "BLUR": 0.0,
+            "FLIP": 0.0,
+            "COLOR": 1.0
+        },
+        "SEARCH": {
+            "SHIFT": 64,
+            "SCALE": 0.18,
+            "BLUR": 0.2,
+            "FLIP": 0.0,
+            "COLOR": 1.0
+        },
+        "NEG": 0.0,
+        "GRAY": 0.0,
+        "NAMES": [
+            "VID",
+            "YOUTUBEBB",
+            "COCO",
+            "DET"
+        ],
+        "VID": {
+            "ROOT": "train_dataset/vid/crop511",
+            "ANNO": "train_dataset/vid/train.json",
+            "FRAME_RANGE": 100,
+            "NUM_USE": 100000
+        },
+        "YOUTUBEBB": {
+            "ROOT": "train_dataset/yt_bb/crop511",
+            "ANNO": "train_dataset/yt_bb/train.json",
+            "FRAME_RANGE": 3,
+            "NUM_USE": -1
+        },
+        "COCO": {
+            "ROOT": "train_dataset/coco/crop511",
+            "ANNO": "train_dataset/coco/train2017.json",
+            "FRAME_RANGE": 1,
+            "NUM_USE": -1
+        },
+        "DET": {
+            "ROOT": "train_dataset/det/crop511",
+            "ANNO": "train_dataset/det/train.json",
+            "FRAME_RANGE": 1,
+            "NUM_USE": -1
+        },
+        "GOT": {
+            "ROOT": "train_dataset/got10k/crop511",
+            "ANNO": "train_dataset/got10k/train.json",
+            "FRAME_RANGE": 50,
+            "NUM_USE": 100000
+        },
+        "LaSOT": {
+            "ROOT": "train_dataset/lasot/crop511",
+            "ANNO": "train_dataset/lasot/train.json",
+            "FRAME_RANGE": 100,
+            "NUM_USE": 100000
+        },
+        "VIDEOS_PER_EPOCH": 600000
+    },
+    "BACKBONE": {
+        "TYPE": "resnet50",
+        "KWARGS": {
+            "used_layers": [
+                2,
+                3,
+                4
+            ]
+        },
+        "PRETRAINED": "",
+        "TRAIN_LAYERS": [
+            "layer2",
+            "layer3",
+            "layer4"
+        ],
+        "LAYERS_LR": 0.1,
+        "TRAIN_EPOCH": 10
+    },
+    "ADJUST": {
+        "ADJUST": true,
+        "KWARGS": {
+            "in_channels": [
+                512,
+                1024,
+                2048
+            ],
+            "out_channels": [
+                256,
+                256,
+                256
+            ]
+        },
+        "TYPE": "AdjustAllLayer"
+    },
+    "CAR": {
+        "TYPE": "MultiCAR",
+        "KWARGS": {}
+    },
+    "TRACK": {
+        "TYPE": "SiamCARTracker",
+        "PENALTY_K": 0.04,
+        "WINDOW_INFLUENCE": 0.44,
+        "LR": 0.33,
+        "EXEMPLAR_SIZE": 127,
+        "INSTANCE_SIZE": 255,
+        "CONTEXT_AMOUNT": 0.5,
+        "STRIDE": 8,
+        "SCORE_SIZE": 25,
+        "hanming": true,
+        "NUM_K": 2,
+        "NUM_N": 1,
+        "REGION_S": 0.1,
+        "REGION_L": 0.44
+    },
+    "HP_SEARCH": {
+        "OTB100": [
+            0.35,
+            0.2,
+            0.45
+        ],
+        "GOT10K": [
+            0.7,
+            0.06,
+            0.1
+        ],
+        "UAV123": [
+            0.4,
+            0.2,
+            0.3
+        ],
+        "LaSOT": [
+            0.33,
+            0.04,
+            0.3
+        ]
+    }
+}
+[2021-04-17 16:45:25,579-rk0-train.py#269] Version Information: 
+commit : 
+  log  : 
+
+[2021-04-17 16:45:25,580-rk0-train.py#270] config 
+{
+    "META_ARC": "siamcar_r50",
+    "CUDA": true,
+    "TRAIN": {
+        "EXEMPLAR_SIZE": 127,
+        "SEARCH_SIZE": 255,
+        "OUTPUT_SIZE": 25,
+        "RESUME": "",
+        "PRETRAINED": "",
+        "LOG_DIR": "./logs",
+        "SNAPSHOT_DIR": "./snapshot",
+        "EPOCH": 20,
+        "START_EPOCH": 0,
+        "BATCH_SIZE": 80,
+        "NUM_WORKERS": 1,
+        "MOMENTUM": 0.9,
+        "WEIGHT_DECAY": 0.0001,
+        "CLS_WEIGHT": 1.0,
+        "LOC_WEIGHT": 3.0,
+        "CEN_WEIGHT": 1.0,
+        "PRINT_FREQ": 20,
+        "LOG_GRADS": false,
+        "GRAD_CLIP": 10.0,
+        "BASE_LR": 0.005,
+        "LR": {
+            "TYPE": "log",
+            "KWARGS": {
+                "start_lr": 0.005,
+                "end_lr": 0.0005
+            }
+        },
+        "LR_WARMUP": {
+            "WARMUP": true,
+            "TYPE": "step",
+            "EPOCH": 5,
+            "KWARGS": {
+                "start_lr": 0.001,
+                "end_lr": 0.005,
+                "step": 1
+            }
+        },
+        "NUM_CLASSES": 2,
+        "NUM_CONVS": 4,
+        "PRIOR_PROB": 0.01,
+        "LOSS_ALPHA": 0.25,
+        "LOSS_GAMMA": 2.0
+    },
+    "DATASET": {
+        "TEMPLATE": {
+            "SHIFT": 4,
+            "SCALE": 0.05,
+            "BLUR": 0.0,
+            "FLIP": 0.0,
+            "COLOR": 1.0
+        },
+        "SEARCH": {
+            "SHIFT": 64,
+            "SCALE": 0.18,
+            "BLUR": 0.2,
+            "FLIP": 0.0,
+            "COLOR": 1.0
+        },
+        "NEG": 0.0,
+        "GRAY": 0.0,
+        "NAMES": [
+            "VID",
+            "YOUTUBEBB",
+            "COCO",
+            "DET"
+        ],
+        "VID": {
+            "ROOT": "train_dataset/vid/crop511",
+            "ANNO": "train_dataset/vid/train.json",
+            "FRAME_RANGE": 100,
+            "NUM_USE": 100000
+        },
+        "YOUTUBEBB": {
+            "ROOT": "train_dataset/yt_bb/crop511",
+            "ANNO": "train_dataset/yt_bb/train.json",
+            "FRAME_RANGE": 3,
+            "NUM_USE": -1
+        },
+        "COCO": {
+            "ROOT": "train_dataset/coco/crop511",
+            "ANNO": "train_dataset/coco/train2017.json",
+            "FRAME_RANGE": 1,
+            "NUM_USE": -1
+        },
+        "DET": {
+            "ROOT": "train_dataset/det/crop511",
+            "ANNO": "train_dataset/det/train.json",
+            "FRAME_RANGE": 1,
+            "NUM_USE": -1
+        },
+        "GOT": {
+            "ROOT": "train_dataset/got10k/crop511",
+            "ANNO": "train_dataset/got10k/train.json",
+            "FRAME_RANGE": 50,
+            "NUM_USE": 100000
+        },
+        "LaSOT": {
+            "ROOT": "train_dataset/lasot/crop511",
+            "ANNO": "train_dataset/lasot/train.json",
+            "FRAME_RANGE": 100,
+            "NUM_USE": 100000
+        },
+        "VIDEOS_PER_EPOCH": 600000
+    },
+    "BACKBONE": {
+        "TYPE": "resnet50",
+        "KWARGS": {
+            "used_layers": [
+                2,
+                3,
+                4
+            ]
+        },
+        "PRETRAINED": "",
+        "TRAIN_LAYERS": [
+            "layer2",
+            "layer3",
+            "layer4"
+        ],
+        "LAYERS_LR": 0.1,
+        "TRAIN_EPOCH": 10
+    },
+    "ADJUST": {
+        "ADJUST": true,
+        "KWARGS": {
+            "in_channels": [
+                512,
+                1024,
+                2048
+            ],
+            "out_channels": [
+                256,
+                256,
+                256
+            ]
+        },
+        "TYPE": "AdjustAllLayer"
+    },
+    "CAR": {
+        "TYPE": "MultiCAR",
+        "KWARGS": {}
+    },
+    "TRACK": {
+        "TYPE": "SiamCARTracker",
+        "PENALTY_K": 0.04,
+        "WINDOW_INFLUENCE": 0.44,
+        "LR": 0.33,
+        "EXEMPLAR_SIZE": 127,
+        "INSTANCE_SIZE": 255,
+        "CONTEXT_AMOUNT": 0.5,
+        "STRIDE": 8,
+        "SCORE_SIZE": 25,
+        "hanming": true,
+        "NUM_K": 2,
+        "NUM_N": 1,
+        "REGION_S": 0.1,
+        "REGION_L": 0.44
+    },
+    "HP_SEARCH": {
+        "OTB100": [
+            0.35,
+            0.2,
+            0.45
+        ],
+        "GOT10K": [
+            0.7,
+            0.06,
+            0.1
+        ],
+        "UAV123": [
+            0.4,
+            0.2,
+            0.3
+        ],
+        "LaSOT": [
+            0.33,
+            0.04,
+            0.3
+        ]
+    }
+}
+[2021-04-17 16:45:27,557-rk0-train.py# 60] build train dataset
+[2021-04-17 16:45:27,557-rk0-dataset.py# 40] loading VID

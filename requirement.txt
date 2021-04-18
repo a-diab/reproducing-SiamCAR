@@ -1,0 +1,8 @@
+opencv-python
+pyyaml
+yacs
+tqdm
+colorama
+matplotlib
+cython
+tensorboardX

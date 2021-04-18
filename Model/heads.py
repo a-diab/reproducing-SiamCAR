@@ -39,7 +39,7 @@ class Heads(nn.Module):
         # initialization
         
         for modules in [self.classification_tower, self.localization_tower,
-                        self.class_logits, bound_box_pred,self.centerness]:
+                        self.class_logits, self.bound_box_pred,self.centerness]:
             
             for l in modules.modules():
                 if isinstance(l, nn.Conv2d):
