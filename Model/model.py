@@ -14,7 +14,7 @@ class Model(nn.Module):
         self.backbone = resnet50([2, 3, 4])
         # head
         self.head = Heads(256)
-        # 1x1 conv dimension reduction
+        # dimension reduction
         self.reduce = nn.ConvTranspose2d(256 * 3, 256, 1, 1)
 
         # loss functions - taken from SiamCAR
